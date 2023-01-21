@@ -8,7 +8,7 @@ public class FieldPrinter {
         this.length = length;
     }
 
-    public void printField(int [][] field) {
+    public void printField(int[][] field) {
         for (int i = 0; i < length; i++) {
             System.out.println(Arrays.toString(field[i]));
         }
