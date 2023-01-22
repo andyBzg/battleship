@@ -4,10 +4,12 @@ public class Game {
 
     private int[][] field;
     private int height;
-    private int length;
+    private int width;
 
-    public Game(int[][] field) {
+    public Game(int[][] field, int height, int width) {
         this.field = field;
+        this.height = height;
+        this.width = width;
     }
 
     public Game() {
@@ -22,12 +24,12 @@ public class Game {
         this.height = height;
     }
 
-    public int getLength() {
-        return length;
+    public int getWidth() {
+        return width;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     public void start() {
@@ -35,16 +37,16 @@ public class Game {
 
         System.out.println("Введите высоту поля: ");
         setHeight(scanner.nextInt());
-        System.out.println("Введите длину поля: ");
-        setLength(scanner.nextInt());
+        System.out.println("Введите ширину поля: ");
+        setWidth(scanner.nextInt());
 
-        FieldGenerator fieldGenerator = new FieldGenerator(height, length);
+        FieldGenerator fieldGenerator = new FieldGenerator(height, width);
         int[][] gameField = fieldGenerator.generate();
 
         FieldPrinter fieldPrinter = new FieldPrinter(height);
         fieldPrinter.printField(gameField);
 
-        Game game = new Game(gameField);
+        Game game = new Game(gameField, height, width);
         game.play();
 
         fieldPrinter.printField(gameField);
@@ -60,8 +62,8 @@ public class Game {
             int first = scanner.nextInt();
             System.out.println("Координата по ширине: ");
             int second = scanner.nextInt();
-            //todo заменить 10 на высоту и длину поля
-            if (first < 5 && second < 5) {
+
+            if (first < height && second < width && first >= 0 && second >= 0) {
                 int shot = field[first][second];
 
                 if (shot == 0) {

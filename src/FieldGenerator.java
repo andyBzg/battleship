@@ -3,7 +3,7 @@ import java.util.Random;
 public class FieldGenerator {
 
     private int height;
-    private int length;
+    private int width;
 
     public int getHeight() {
         return height;
@@ -13,22 +13,22 @@ public class FieldGenerator {
         this.height = height;
     }
 
-    public int getLength() {
-        return length;
+    public int getWidth() {
+        return width;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public FieldGenerator(int height, int length) {
+    public FieldGenerator(int height, int width) {
         this.height = height;
-        this.length = length;
+        this.width = width;
     }
 
     public int[][] generate() {
         Random random = new Random();
-        int[][] field = new int[height][length];
+        int[][] field = new int[height][width];
 
         //simpleShip - одна клетка х 4
         //destroyer - 2 клетки х 3
@@ -38,7 +38,7 @@ public class FieldGenerator {
         int destroyer = 0;
         while (destroyer < 3) {
             int a = random.nextInt(0, height);
-            int b = random.nextInt(0, length - 1);
+            int b = random.nextInt(0, width - 1);
 
             if (field[a][b] == 0) {
                 field[a][b] = 2;
@@ -59,7 +59,7 @@ public class FieldGenerator {
         int simpleShip = 0;
         while (simpleShip < 4) {
             int a = random.nextInt(0, height);
-            int b = random.nextInt(0, length);
+            int b = random.nextInt(0, width);
 
             if (field[a][b] == 0) {
                 field[a][b] = 1;
