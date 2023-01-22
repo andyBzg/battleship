@@ -5,16 +5,20 @@ public class Game {
     private int[][] field;
     private int height;
     private int width;
+    private int attempts;
 
-    public Game(int[][] field, int height, int width) {
+
+    public Game(int[][] field, int height, int width, int attempts) {
         this.field = field;
         this.height = height;
         this.width = width;
+        this.attempts = attempts;
     }
 
     public Game() {
 
     }
+
 
     public int getHeight() {
         return height;
@@ -32,6 +36,15 @@ public class Game {
         this.width = width;
     }
 
+    public int getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
+    }
+
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
@@ -39,6 +52,8 @@ public class Game {
         setHeight(scanner.nextInt());
         System.out.println("Введите ширину поля: ");
         setWidth(scanner.nextInt());
+        System.out.println("Введите количество попыток: ");
+        setAttempts(scanner.nextInt());
 
         FieldGenerator fieldGenerator = new FieldGenerator(height, width);
         int[][] gameField = fieldGenerator.generate();
@@ -46,7 +61,7 @@ public class Game {
         FieldPrinter fieldPrinter = new FieldPrinter(height);
         fieldPrinter.printField(gameField);
 
-        Game game = new Game(gameField, height, width);
+        Game game = new Game(gameField, height, width, attempts);
         game.play();
 
         fieldPrinter.printField(gameField);
@@ -57,7 +72,7 @@ public class Game {
 
         int counter = 0;
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < attempts; i++) {
             System.out.println("Координата по высоте: ");
             int first = scanner.nextInt();
             System.out.println("Координата по ширине: ");

@@ -5,6 +5,13 @@ public class FieldGenerator {
     private int height;
     private int width;
 
+
+    public FieldGenerator(int height, int width) {
+        this.height = height;
+        this.width = width;
+    }
+
+
     public int getHeight() {
         return height;
     }
@@ -21,10 +28,6 @@ public class FieldGenerator {
         this.width = width;
     }
 
-    public FieldGenerator(int height, int width) {
-        this.height = height;
-        this.width = width;
-    }
 
     public int[][] generate() {
         Random random = new Random();
