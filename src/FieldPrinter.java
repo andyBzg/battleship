@@ -2,14 +2,14 @@ import java.util.Arrays;
 
 public class FieldPrinter {
 
-    private int length;
+    private int height;
 
-    public FieldPrinter(int length) {
-        this.length = length;
+    public FieldPrinter(int height) {
+        this.height = height;
     }
 
     public void printField(int[][] field) {
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < height; i++) {
             System.out.println(Arrays.toString(field[i]));
         }
     }
