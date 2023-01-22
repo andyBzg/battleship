@@ -58,12 +58,10 @@ public class Game {
         FieldGenerator fieldGenerator = new FieldGenerator(height, width);
         int[][] gameField = fieldGenerator.generate();
 
-        FieldPrinter fieldPrinter = new FieldPrinter(height);
-        fieldPrinter.printField(gameField);
-
         Game game = new Game(gameField, height, width, attempts);
         game.play();
 
+        FieldPrinter fieldPrinter = new FieldPrinter(height);
         fieldPrinter.printField(gameField);
     }
 
