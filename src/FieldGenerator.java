@@ -51,8 +51,8 @@ public class FieldGenerator {
 
         boolean battleshipRotation = random.nextBoolean();
 
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field[i].length; j++) {
+        for (int i = 0; i < field.length; i++) {        //идём по строчкам
+            for (int j = 0; j < field[i].length; j++) { //по каждому элементу в строчке
                 if (field[i][j] == 4 && battleshipRotation) {
                     for (int k = 0; k < 3; k++) {
                         j++; // rotation == true - горизонтальное отображение
@@ -69,24 +69,27 @@ public class FieldGenerator {
         }
 
         int destroyer = 0;
-        while (destroyer < 4) {
-            int a = random.nextInt(0, height);
+        while (destroyer < 10) {
+            int a = random.nextInt(0, height - 1);
             int b = random.nextInt(0, width - 1);
 
-            if (field[a][b] == 0) {
-                field[a][b] = 2;
-                destroyer++;
-            }
-        }
+            boolean horizontal = random.nextBoolean();
 
-        for (int i = 0; i < field.length; i++) {        //идём по строчкам
-            for (int j = 0; j < field[i].length; j++) { //по каждому элементу в строчке
-
-                if (field[i][j] == 2) {
-                    j++;
-                    field[i][j] = 2;
+            if (horizontal) {
+                if (checkCollisionHorizontal(field, a, b)) {
+                    field[a][b] = 2;
+                    field[a][b + 1] = 2;
+                    destroyer++;
                 }
             }
+            else {
+                if (checkCollisionVertical(field, a, b)) {
+                    field[a][b] = 2;
+                    field[a + 1][b] = 2;
+                    destroyer++;
+                }
+            }
+
         }
 
         int simpleShip = 0;
@@ -101,5 +104,13 @@ public class FieldGenerator {
 
         }
         return field;
+    }
+
+    private boolean checkCollisionHorizontal(int[][] field, int a, int b) {
+        return field[a][b] == 0 && field[a][b + 1] == 0;
+    }
+
+    private boolean checkCollisionVertical(int[][] field, int a, int b) {
+        return field[a][b] == 0 && field[a + 1][b] == 0;
     }
 }
