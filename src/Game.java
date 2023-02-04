@@ -46,29 +46,26 @@ public class Game {
 
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите высоту поля: ");
-        setHeight(scanner.nextInt());
-        System.out.println("Введите ширину поля: ");
-        setWidth(scanner.nextInt());
-        System.out.println("Введите количество попыток: ");
-        setAttempts(scanner.nextInt());
+        double coefficient = 0.1;
+        int shipsPerField = (int) (height * width * coefficient);
 
-        FieldGenerator fieldGenerator = new FieldGenerator(height, width);
+        FieldGenerator fieldGenerator = new FieldGenerator(height, width, shipsPerField);
         int[][] gameField = fieldGenerator.generate();
+
+        FieldPrinter fieldPrinter = new FieldPrinter(height);
+        fieldPrinter.printField(gameField);
 
         Game game = new Game(gameField, height, width, attempts);
         game.play();
 
-        FieldPrinter fieldPrinter = new FieldPrinter(height);
         fieldPrinter.printField(gameField);
     }
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
 
-        int counter = 0;
+        int points = 0;
 
         for (int i = 0; i < attempts; i++) {
             System.out.println("Координата по высоте: ");
@@ -86,7 +83,7 @@ public class Game {
                     System.out.println("Корабль уже подбит");
                 }
                 else if (shot > 0 && shot < 5) {
-                    counter++;
+                    points++;
                     field[first][second] = 8;
                     System.out.println("Попадание!");
                 }
@@ -94,10 +91,8 @@ public class Game {
             else {
                 System.out.println("Мимо поля");
             }
-
         }
+        System.out.println("Ты уничтожил кораблей: " + points);
 
-        System.out.println("Ты уничтожил кораблей: " + counter);
     }
-
 }
